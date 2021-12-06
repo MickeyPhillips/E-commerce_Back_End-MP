@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     include: [
       {
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+        attributes: ['product_name', 'price', 'stock', 'category_id']
       }
     ]
   })
@@ -27,13 +27,12 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Product data
   Tag.findOne({
     where: {
-      id: req.body.id
+      id: req.params.id
     },
-    attributes: ['id', 'tag_name'],
     include: [
       {
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+        attributes: ['product_name', 'price', 'stock', 'category_id']
       }
     ]
   })
@@ -66,7 +65,7 @@ router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
   Tag.update(req.body, {
     where: {
-      id: req.body.id
+      id: req.params.id
     }
   })
     .then(data => {
